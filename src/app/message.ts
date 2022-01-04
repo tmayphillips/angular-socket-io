@@ -1,3 +1,7 @@
 export class Message{
-    constructor(room:string, user:string, message:string){}
+    constructor(
+        public room:string, 
+        public user:string, 
+        public message:string
+    ){}
 }

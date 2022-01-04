@@ -1,6 +1,9 @@
 const Express = require('express')()
 const Http = require('http').createServer(Express)
 const SocketIO = require('socket.io')(Http, { cors: { origins: '*' } })
+class Message{
+    constructor(room, user, message){}
+}
 
 const port = process.env.PORT || 1978
 
@@ -20,7 +23,7 @@ SocketIO.on('connection', (socket) => {
     socket.on("message", (info) => {
         console.log(`user: ${socket.id}| uName: ${users[socket.id]} | message: ${info.message} | roomName: ${info.roomName}`)
         
-        SocketIO.emit('message', {user: users[socket.id], message: info.message})
+        SocketIO.emit('message data', {user: users[socket.id], message: info.message})
     })
 });
 

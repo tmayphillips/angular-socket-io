@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { of } from 'rxjs';
 import { SocketService } from '../socket.service';
 import * as io from 'socket.io-client';
 import { Message } from '../message';
@@ -12,7 +13,7 @@ export class ChatComponent implements OnInit {
   user:string = '';
   users:string[] = ['jacob', 'tiffany', 'pato']
   // msgText:string = '';
-  messages:string[] = []
+  messages:Message[] = []
   room:string = '';
 
 
@@ -21,11 +22,10 @@ export class ChatComponent implements OnInit {
 
   ngOnInit(): void {
     this.socketService.setupSocket();
-    // this.socketService.setUser();
-
-    this.socketService.getMessage().subscribe((message:any) => {
-      console.log(message);
-      this.messages.push(message.message);
+    this.socketService.setUser();
+    of(this.socketService.messages).subscribe((data)=> {
+      console.log(data)
+      this.messages = data
     })
   }
 
