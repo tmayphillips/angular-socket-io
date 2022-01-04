@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Socket } from 'ngx-socket-io';
+import io from 'socket.io-client'
 import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -7,8 +7,10 @@ import { map } from 'rxjs/operators';
 })
 export class SocketService {
 
-  constructor(private socket: Socket) { }
+  private url = 'http://localhost:3000'
+  private socket: any
 
+  constructor() { this.socket = io(this.url) }
   sendMessage(msg: string) {
     this.socket.emit('message', msg);
   }
