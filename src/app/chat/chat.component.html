@@ -1,1 +1,5 @@
 <p>chat works!</p>
+<ul>
+    <div *ngFor="let message of messages">{{message.user}} said {{message.msg}}</div>
+</ul>
+<button (click)="sendTest()">send</button>
