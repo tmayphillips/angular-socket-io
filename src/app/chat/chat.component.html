@@ -1,1 +1,22 @@
-<p>chat works!</p>
+<div class='container'>
+    <h2 class='title'>Chat {{room}}</h2>
+    
+    <div class='message-area'>
+        <ul>
+            <li *ngFor="let msg of messages" class='message'>
+                {{msg}}
+            </li>
+        </ul>
+    </div>
+    <div class='chat-area'>
+        <input #msgInput type='text'>
+        <button type='submit' (click)="sendMessage(msgInput.value); msgInput.value='' ">Send</button>
+    </div>
+    <div class='user-area'>
+        <ul>
+            <li *ngFor="let user of users" class='users'>
+                {{user}}
+            </li>
+        </ul>
+    </div>
+</div>
