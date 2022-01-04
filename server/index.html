@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat App</title>
+    
+</head>
+<body>
+    <ul id="messages"></ul>
+    <form action="" id="form">
+        <input type="text" id="input">
+        <button type="submit">Send</button>
+    </form>
+    <!-- <script src="/socket.io/socket.io.js"></script> -->
+    <script src="https://cdn.socket.io/4.4.0/socket.io.min.js" integrity="sha384-1fOn6VtTq3PWwfsOrk45LnYcGosJwzMHv+Xh/Jx5303FVOXzEnw0EpLv30mtjmlj" crossorigin="anonymous"></script>
+
+    <script>
+        const socket = io();
+
+        let messages = document.querySelector('#messages');
+        let form = document.querySelector('#form');
+        let input = document.querySelector('#input');
+
+        form.addEventListener('submit', (event)=>{
+            event.preventDefault();
+            if(input.value){
+                socket.emit('chat message', input.value);
+                input.value='';
+            }
+        })
+
+        socket.on('chat message', function(msg){
+            let chatMessage = document.createElement('li');
+            chatMessage.innerText = msg;
+            messages.appendChild(chatMessage);
+        })
+
+
+
+    </script>
+
+</body>
+</html>
