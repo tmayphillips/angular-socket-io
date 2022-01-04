@@ -10,9 +10,10 @@ export class SocketService {
 
   private url = 'http://localhost:1978'
   private socket: any
- names = ['bob', 'gina', 'anil', 'nguyen', 'lupita', 'colin', 'dole'];
+
   constructor() {  }
   messages:Message[] = [];
+  users:string[] = []
   setupSocket = () => {
     this.socket = io(this.url);
 
@@ -21,13 +22,19 @@ export class SocketService {
       console.log(data);
     });
 
+    this.socket.on('new user', (data:string) => {
+      this.users.push(data)
+      console.log(data);
+    });
+
   }
   sendMessage(room:string, user:string, msg: string) {
     const newMsg = new Message(room,user,msg);
     this.socket.emit('message', newMsg);
   }
-  setUser() {
-    this.socket.emit('set user', this.names[Math.floor(Math.random()*this.names.length)]);
+
+  setUser(user:string) {
+    this.socket.emit('set user', user);
   }
 
   getMessage() {

@@ -11,7 +11,7 @@ import { Message } from '../message';
 })
 export class ChatComponent implements OnInit {
   user:string = '';
-  users:string[] = ['jacob', 'tiffany', 'pato']
+  users:string[] = []
   // msgText:string = '';
   messages:Message[] = []
   room:string = '';
@@ -22,10 +22,19 @@ export class ChatComponent implements OnInit {
 
   ngOnInit(): void {
     this.socketService.setupSocket();
-    this.socketService.setUser();
     of(this.socketService.messages).subscribe((data)=> {
       console.log(data)
       this.messages = data
+    })
+  }
+
+  createUser(user:string) {
+    this.user = user
+    this.socketService.setUser(user)
+    of(this.socketService.users).subscribe((data)=> {
+      console.log(data)
+      this.users = data
+      console.log(this.users)
     })
   }
 

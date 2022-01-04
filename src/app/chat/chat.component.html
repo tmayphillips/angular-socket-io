@@ -1,16 +1,21 @@
 <div class='container'>
     <h2 class='title'>Chat {{room}}</h2>
     
+    
+    <div class='chat-area' *ngIf="user">
+        <input #msgInput type='text'>
+        <button type='submit' (click)="sendMessage(msgInput.value); msgInput.value='' ">Send</button>
+    </div>
+    <div *ngIf="!user">
+        <input #userInput type='text' placeholder='enter name'>
+        <button type='submit' (click)="createUser(userInput.value); userInput.value='' ">Send</button>
+    </div>
     <div class='message-area'>
         <ul>
             <li *ngFor="let message of messages" class='message'>
                 {{message.user}} said {{message.message}}
             </li>
         </ul>
-    </div>
-    <div class='chat-area'>
-        <input #msgInput type='text'>
-        <button type='submit' (click)="sendMessage(msgInput.value); msgInput.value='' ">Send</button>
     </div>
     <div class='user-area'>
         <ul>

@@ -18,6 +18,7 @@ SocketIO.on('connection', (socket) => {
             users[socket.id] = userName;
         }
         console.log(users[socket.id])
+        SocketIO.emit('new user', userName)
     })
 
     socket.on("message", (info) => {
