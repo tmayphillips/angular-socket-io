@@ -20,6 +20,7 @@ export class SocketService {
       this.messages.push(data)
       console.log(data);
     });
+
   }
   sendMessage(room:string, user:string, msg: string) {
     const newMsg = new Message(room,user,msg);
