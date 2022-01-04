@@ -1,20 +1,12 @@
-const express = require('express');
-const app = express();
-const http = require('http');
-const server = http.createServer(app);
-var cors = require('cors');
-app.use(cors());
-const io = require('socket.io')(http, {
-    cors: {
-        origins: ['http://localhost:4200'],
-        methods: ["GET", "POST"]
-    }
+const Express = require('express')()
+const Http = require('http').Server(Express)
+const SocketIO = require('socket.io')(Http, { cors: { origins: '*' } })
+
+const port = process.env.PORT || 3000
+Http.listen(port, () => {
+    console.log('Listening on port: ' + port)
 })
 
-io.on('connection', (socket) => {
+SocketIO.on('connection', (socket) => {
     console.log('a user connected');
-});
-
-server.listen(3000, () => {
-  console.log('listening on *:3000');
 });
