@@ -8,20 +8,20 @@ class Message{
 const port = process.env.PORT || 1978
 
 const rooms = []; //roomName: { users:[{socket.id: name}], messages:['user/: message 1']}
-const users = [];
+const users = [], userNames = [];
 SocketIO.on('connection', (socket) => {
     let currentRoom = '';
     console.log('a user connected');
-
-    const userNames = []
 
     socket.on("set user", (userName) => {
         if(!users[socket.id]){
             users[socket.id] = userName;
             userNames.push(userName)
         }
-        console.log(users[socket.id])
-        SocketIO.emit('new user', userNames)
+        //console.log(users[socket.id])
+        SocketIO.emit('new user', userName)
+
+        //SocketIO.emit('all users', userNames)
     })
 
     socket.on("message", (info) => {

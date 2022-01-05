@@ -15,7 +15,7 @@ export class ChatComponent implements OnInit {
   messages:Message[] = []
   room:string = '';
   
-  color:string = "hsl(" + Math.random() * 360 + ", 100%, 75%)";
+  color:string = "hsl(" + Math.random() * 360 + ", 100%, 75%)"
 
   constructor(private socketService:SocketService) { 
   }
