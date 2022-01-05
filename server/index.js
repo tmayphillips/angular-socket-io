@@ -8,7 +8,7 @@ class Message{
 const port = process.env.PORT || 1978
 
 const rooms = []; //roomName: { users:[{socket.id: name}], messages:['user/: message 1']}
-const users = [{'BrAdYTzvC0E9f9MjAAAF':'bobby'}];
+const users = [];
 SocketIO.on('connection', (socket) => {
     let currentRoom = '';
     console.log('a user connected');
@@ -23,7 +23,6 @@ SocketIO.on('connection', (socket) => {
 
     socket.on("message", (info) => {
         console.log(`user: ${socket.id}| uName: ${users[socket.id]} | message: ${info.message} | roomName: ${info.roomName}`)
-        
         SocketIO.emit('message data', {user: users[socket.id], message: info.message})
     })
 });
