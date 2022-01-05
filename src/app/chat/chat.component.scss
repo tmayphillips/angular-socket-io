@@ -1,0 +1,101 @@
+
+$avatar-size: 50px;
+
+#intro {
+    background-image: url(https://mdbootstrap.com/img/new/fluid/city/008.jpg);
+    height: 100vh;
+  }
+  #intro .mask{
+    overflow-y: scroll;
+  }
+  .container{
+    max-height: 92vh;
+  }
+  section{
+    margin-bottom: 150px;
+  }
+  .send-message{
+    position: fixed;
+    bottom: 100px;
+    z-index: 1;
+    left: 0;
+    right: 0;
+    padding: 10px;
+    text-align: center;
+  }
+  .circle {
+    // background-color: rgb(random(255), random(255), random(255));
+    border-radius: 50%;
+    height: $avatar-size;
+    text-align: center;
+    width: $avatar-size;
+  }
+  .initials {
+    font-size: calc($avatar-size / 2); /* 50% of parent */
+    line-height: 1;
+    position: relative;
+    top: calc($avatar-size / 4); /* 25% of parent */
+  }
+  /* Height for devices larger than 576px */
+  @media (min-width: 992px) {
+    #intro {
+      margin-top: -58.59px;
+    }
+  }
+
+  .navbar .nav-link {
+    color: #fff !important;
+  }
+
+  #story {
+    margin: auto;
+    overflow: hidden;
+    position: fixed;
+    z-index: 1;
+    bottom: 155px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    padding-top: 10px;
+  }
+  #story .circle {
+    height: $avatar-size/2;
+    width: $avatar-size/2;
+  }
+  #story .initials {
+    font-size: calc($avatar-size / 4); 
+    top: -2px;
+    color: #fff;
+  }
+  .story {
+    border-radius: 50%;
+  }
+
+  .story-container ul {
+    list-style-type: none;
+    display: flex;
+    overflow-y: auto;
+    margin: 0;
+  }
+
+  .story-container ul li {
+    padding: 0 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .story-container ul li .story {
+    padding: 2px;
+    background: #fff;
+  }
+
+  .footer{
+    background-color: rgba(0, 0, 0, 0.2);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }

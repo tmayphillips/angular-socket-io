@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { of } from 'rxjs';
 import { SocketService } from '../socket.service';
-import * as io from 'socket.io-client';
 import { Message } from '../message';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-chat',
@@ -12,10 +12,10 @@ import { Message } from '../message';
 export class ChatComponent implements OnInit {
   user:string = '';
   users:string[] = []
-  // msgText:string = '';
   messages:Message[] = []
   room:string = '';
-
+  
+  color:string = "hsl(" + Math.random() * 360 + ", 100%, 75%)";
 
   constructor(private socketService:SocketService) { 
   }
@@ -23,7 +23,6 @@ export class ChatComponent implements OnInit {
   ngOnInit(): void {
     this.socketService.setupSocket();
     of(this.socketService.messages).subscribe((data)=> {
-      console.log(data)
       this.messages = data
     })
   }
@@ -32,12 +31,13 @@ export class ChatComponent implements OnInit {
     this.user = user
     this.socketService.setUser(user)
     of(this.socketService.users).subscribe((data)=> {
-      console.log(data)
       this.users = data
-      console.log(this.users)
     })
   }
 
+  enterChat(form:NgForm){
+    this.createUser(form.value.user);
+  }
 
   sendMessage(msgText:string) {
     this.socketService.sendMessage(this.room, this.user, msgText)
