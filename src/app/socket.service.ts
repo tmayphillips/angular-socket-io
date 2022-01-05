@@ -14,6 +14,8 @@ export class SocketService {
   constructor() {  }
   messages:Message[] = [];
   users:string[] = []
+  allUsers:string[] = [];
+
   setupSocket = () => {
     this.socket = io(this.url);
 
@@ -21,10 +23,14 @@ export class SocketService {
       this.messages.push(data)
       console.log(data);
     });
+//new
+    // this.socket.on('all users', (data:string[]) => {
+    //   this.allUsers = data
+    //   console.log(this.allUsers);
+    // });
 
     this.socket.on('new user', (data:string) => {
       this.users.push(data)
-      console.log(data);
     });
 
   }
