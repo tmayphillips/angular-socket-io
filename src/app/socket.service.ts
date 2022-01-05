@@ -22,8 +22,9 @@ export class SocketService {
       console.log(data);
     });
 
-    this.socket.on('new user', (data:string[]) => {
-      this.users = data;
+    this.socket.on('new user', (data:string) => {
+      this.users.push(data)
+      console.log(data);
     });
 
   }
